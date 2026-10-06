@@ -1,168 +1,137 @@
 # Fidelis × Cursor — speaker card (15 min)
 
 Repo: [github.com/idildogaturkmen/fidelis](https://github.com/idildogaturkmen/fidelis)
+Live site: [fidelisapp.netlify.app](https://fidelisapp.netlify.app)
 
-Print this or keep it on your phone. **Left = what you say / type. Right = only you see.**
+Phone / print this. **Left = say or type. Right = only you.**
 
-Do not paste a manifesto. Type like you would at 11pm on your own project.
+Type like Slack. Don’t paste a spec.
 
----
-
-## Night before (not on stage)
-
-1. Open **Fidelis** in Cursor Desktop (File → Open Folder → the `fidelis` clone).
-2. New branch: `git checkout -b demo/startup-club-live`
-3. Optional but safer: copy `fidelis-demo-prep/` from cursor-demo so you have **Open the Lisbon demo trip** (no API on stage). Or generate a trip tonight and use **Resume your last trip**.
-4. `npx --yes serve . -p 5173` — confirm the dossier opens.
-5. Practice **Cmd+K once** on any sentence, then Undo (`Cmd+Z`).
-6. Practice typing `/create-skill` in Agent so you know the menu.
-
-Do **not** leave an itinerary view or a skill in the branch. Live room starts clean.
+**Must be in the IDE** (click **IDE** at the top, or right-click **fidelis** → Open in IDE). The Agents Window makes Cmd+K open search, not inline edit.
 
 ---
 
-## How this room should feel
+## Shortcuts you’ll mention
 
-You are a founder using Cursor on **your** app. The audience should think: “I could type that.”
-
-If you freeze, the **TYPE** line is the whole prompt. If you are fluent, use your own words — same idea is enough.
-
----
-
-## 0:00–1:30 · What Cursor is + models
-
-| You | Notes (don’t read) |
+| Keys | What it is |
 | --- | --- |
-| **SAY:** “This is Fidelis — I built it as a travel planner. Cursor is the editor I actually use on it.” | File tree left, Agent chat right. Open `http://localhost:5173` in the **browser side tab** so the app sits next to the code. |
-| **DO:** Click the **model name** on the Agent input (bottom of the chat). | `Cmd+/` also cycles models. |
-| **SAY:** “You pick a model per chat. When I am planning or starting from scratch I use **Fable 5** — smarter, uses more tokens. Once I know the change, I switch to **Grok 4.6 or 4.7** so it implements faster and cheaper.” | Stay on **Grok 4.7** for the rest if switching live feels messy. The *point* is the picker exists. |
-| **SAY:** “Same box has modes: **Agent** does the work, **Plan** only writes a plan, **Ask** is read-only. We want Agent.” | Leave mode on **Agent**. |
+| **Cmd+/** | Cycle / open the **model** picker |
+| **Cmd+N** | **New chat.** New feature → new conversation. Long threads fill context and get worse. |
+| **Cmd+K** | **Inline edit** — only in the IDE, with code **selected**. In the Agents Window it is search (ignore that tomorrow). |
+| **Cmd+L** | Send the selection to Agent |
+| **/** | Skills menu. **`/create-skill`** writes a new playbook into the repo. |
+
+Modes on the Agent box: **Ask** (read-only) · **Plan** (plan, no code) · **Agent** (does the work) · **Debug** (hunt a failure) · **Cloud** (VM + PR). Parallel chats = **Cmd+N** while another run is going (multitask).
 
 ---
 
-## 1:30–2:00 · Show the product
+## 0:00–1:00 · Live product
 
 | You | Notes |
 | --- | --- |
-| **DO:** Click **Open the Lisbon demo trip** (or Resume last trip). | Dossier: dark header, hotel, “Your days, mapped”. Day 3 is empty on purpose. |
-| **SAY:** “Quiz in the front, trip dossier in the back. Days already exist as morning / afternoon / evening. I want a dedicated itinerary view — that’s a real ticket, not a hello-world.” | If they ask “why not generate live?” — API key lives on Netlify; sample trip is the honest demo path. |
+| Browser: **fidelisapp.netlify.app** | 30 seconds. Don’t run the quiz on stage (API). |
+| **SAY:** “This is Fidelis — I shipped it. Quiz in, trip dossier out. Cursor is how I actually build on it.” | Then switch to Cursor, project **fidelis**, **IDE** view. |
 
 ---
 
-## 2:00–10:00 · Agent (type this like a human)
-
-Click the Agent chat. Type slowly enough that people can read. Send when it looks like a Slack message.
-
-**TYPE (one breath):**
-
-> look around this repo first so I know how views work — then add a simple day-by-day itinerary for this trip. one card per day, empty days should feel friendly, and a button on the trip page to open it. match the current look. this is vanilla JS, don’t add react.
+## 1:00–2:00 · Editor + model + new chat
 
 | You | Notes |
 | --- | --- |
-| **SAY while it runs:** “I didn’t paste a spec. I said the outcome. Cursor searches the repo — that’s the point vs a chatbot that doesn’t have your files.” | It should mention `index.html`, `show()`, `plan.days`, maybe `demo/sample-trip.js`. |
-| If it asks a question, answer in one line: “yes, keep it in index.html” | If it starts scaffolding Next/React: type **stay in index.html, vanilla only** and send. |
-| When the diff appears, click `index.html` so they see the new view. | Refresh the browser if it doesn’t hot-reload (static `serve`). |
-| **DO:** Click **View itinerary** (or whatever it named the button). | Day 3 should look empty. That’s your Cmd+K setup. |
-
-**If it breaks:** don’t panic. Copy the error, type:
-
-> that’s the error — smallest fix, don’t refactor
-
-**If it is slow:** narrate the files it opened. Silence is worse than a slow agent.
+| **DO:** **Cmd+N** | Empty thread. |
+| **SAY:** “**Cmd+N** — new chat for a new feature. If I keep one giant thread, context grows and it gets dumber and more expensive.” | |
+| **DO:** **Cmd+/** | Model names flip / picker opens. |
+| **SAY:** “**Cmd+/** picks the model. I use **Fable 5** to plan or start from scratch. Once I know the change I switch to **Grok 4.6 or 4.7** — faster, fewer tokens.” | Leave **Grok 4.7** on if switching live feels messy. |
+| Local tab: `localhost:5173` → Lisbon demo trip (or Resume). | Side browser next to the code. |
 
 ---
 
-## 10:00–12:00 · Cmd+K (inline edit)
+## 2:00–5:00 · Plan mode (don’t code yet)
 
-This is the teaching beat. Slow down.
-
-### What Cmd+K is
-
-Agent is the sidebar coworker. **Cmd+K** (Mac) / **Ctrl+K** (Windows) is a highlighter on the code itself: select a few lines, say what to change, it edits **only that**.
-
-You do **not** need chat for “rename this heading.”
-
-### Do it live
-
-| You | Notes |
-| --- | --- |
-| **DO:** In `index.html`, click the itinerary heading (the `<h2>` it just added). Select that line. | Select the empty-state sentence too if you want both in one shot. |
-| **SAY:** “Chat is overkill for this. Select the code, **Cmd+K**.” | Press **Cmd+K** / **Ctrl+K**. A small inline bar appears **on the code**. |
-| **TYPE:** `call this Your trip, day by day` | Short. Human. Press **Return**. |
-| **DO:** Accept the diff (Tab / Keep, depending on what the UI shows). | To undo: **Cmd+Z**. To ask instead of edit: **Opt+Return** (Mac) / **Alt+Return** (Win) after Cmd+K. |
-| Optional second Cmd+K on the empty day: **TYPE:** `make this empty state "Free day. Add something fun?"` | Two tiny edits look more real than one mega-prompt. |
-| **SAY:** “Cmd+K stays in the file. **Cmd+L** would throw this selection into Agent if it got bigger.” | Refresh browser, point at the new heading. |
-
-Practice tonight: pick any `<p>` on the homepage, Cmd+K `make this one clause shorter`, then Undo.
-
----
-
-## 12:00–14:00 · Skills (create one live)
-
-### What a skill is
-
-A **skill** is a markdown playbook in the repo. Next time, Agent reads it so you don’t re-explain “we use Fraunces, teal, no React.”
-
-It lives at `.cursor/skills/some-name/SKILL.md`. You can also type `/` in chat to attach one, or `/create-skill` to make a new one.
-
-### Do it live
-
-New Agent message. Type `/create-skill` — pick it from the menu — then keep typing in plain English:
+Switch the mode dropdown to **Plan**.
 
 **TYPE:**
 
-> /create-skill for fidelis UI. save it in the repo. whenever we change the interface, reuse our cards and buttons, keep the teal palette and Fraunces headings, empty states stay short and travel-y, and new screens are another view in index.html — not a new framework.
+> I want a day-by-day itinerary for the current trip — one card per day, friendly empty days, a button on the trip page. don’t write code yet, just plan it. this is vanilla JS in index.html, no react.
 
 | You | Notes |
 | --- | --- |
-| **SAY:** “I’m not writing the skill by hand. I’m telling Cursor how we like to work, and it writes the file.” | It should create `.cursor/skills/…/SKILL.md` with `name:` + `description:` at the top. |
-| **DO:** Open the file, scroll it for 10 seconds. | Point at frontmatter (`---` block) and 5–6 bullets. |
-| **SAY:** “Next time I type `/` and the skill name, or I just say ‘follow our UI skill’. Teammates get it because it’s in git.” | Don’t read the skill aloud. |
-
-If `/create-skill` is awkward on stage, skip the slash and type:
-
-> make a small project skill at .cursor/skills/fidelis-ui/SKILL.md so future agents match our cards, colors, and how we add views
-
-Same outcome.
+| **SAY:** “Plan mode researches and writes steps. I can edit the plan before anything changes.” | Skim 3 bullets out loud. Don’t accept a rewrite to Next. |
+| **SAY:** “Ask is for questions with no edits. Debug is when something is red. Agent is when I want it to build. I can **Cmd+N** a second chat if I want two things at once.” | That’s Ask / Debug / Agent / multitask in 15 seconds. Don’t demo all four as separate epics. |
 
 ---
 
-## 14:00–15:00 · Cloud Agents (then stop)
+## 5:00–10:00 · Agent implements
+
+Switch to **Agent**. Same chat is fine.
+
+**TYPE:**
+
+> ok implement that plan. keep it small. match the existing look.
 
 | You | Notes |
 | --- | --- |
-| **DO:** On the Agent input, open the dropdown and click **Cloud** (or open [cursor.com/agents](https://cursor.com/agents) on your phone). | Don’t wait for it to finish. |
-| **SAY:** “Everything so far used my laptop. Cloud Agents get their own machine and a PR. I kick it off and close the lid.” | GitHub repo is already [idildogaturkmen/fidelis](https://github.com/idildogaturkmen/fidelis). |
-| **TYPE (short):** `add a short packing list to the trip dossier, same card style, then open a PR` | You can send this from the website or Slack `@cursor` too. |
-| **SAY:** “I’d review that PR tomorrow. That’s the loop — not magic autocomplete.” | End. Don’t demo the packing list if it isn’t done. |
+| While it runs: click files in the diff. | If it starts React: `stay in index.html, vanilla only`. |
+| Error: | `that’s the error — smallest fix, don’t refactor` |
+| Click the new itinerary button in the browser. | Day 3 empty → your Cmd+K setup. |
+
+Optional **Ask** (Cmd+N if you want a side thread):
+
+> how do views work in this app? don’t change anything
+
+Optional **Debug** only if something actually broke. Don’t fake a bug.
 
 ---
 
-## Recap (20 seconds)
+## 10:00–12:00 · Cmd+K in the editor
 
-1. **Agent** — a real feature, typed like a Slack message.
-2. **Cmd+K** — a few lines, in place.
-3. **Skill** — teach the repo how you like UI, once.
-4. **Cloud** — same agent, not on your laptop.
-
----
-
-## If wifi / Agent dies
-
-You can still look like you meant it:
-
-1. File tree: `index.html` is the app, `netlify/functions/plan.js` is the planner.
-2. Cmd+K on the homepage `<h1>`: `make this punchier, keep the line break`.
-3. Show [cursor.com/agents](https://cursor.com/agents) even if you don’t launch.
-
----
-
-## Cheatsheet (if your mind blanks)
-
-| Beat | Type this, nothing else |
+| You | Notes |
 | --- | --- |
-| Agent | `look around first, then add a day-by-day itinerary for this trip — one card per day, friendly empty days, button on the trip page, match existing styles, no react` |
-| Cmd+K | select heading → `call this Your trip, day by day` |
-| Skill | `/create-skill fidelis UI — same cards, teal, Fraunces, views stay in index.html` |
-| Cloud | `packing list on the dossier, same style, open a PR` |
-| Fix | `smallest fix, don’t refactor` |
+| Open `index.html`, **select** the new itinerary heading. | If you don’t select, Cmd+K may feel like search. |
+| **SAY:** “Chat is overkill for a heading. Select, **Cmd+K** — the bar sits on the code.” | |
+| **TYPE:** `call this Your trip, day by day` | Return, accept. **Cmd+Z** if you need to undo. |
+| Optional: select empty state → Cmd+K → `Free day. Add something fun?` | |
+| **SAY:** “**Cmd+L** would throw this selection into Agent if it got bigger.” | Refresh the browser. |
+
+---
+
+## 12:00–14:00 · `/create-skill`
+
+**TYPE** `/create-skill` then keep going:
+
+> for fidelis UI. save it in the project. whenever we change the interface, reuse our cards and buttons, keep the teal palette and Fraunces headings, empty states stay short, and new screens are another view in index.html not a new framework.
+
+| You | Notes |
+| --- | --- |
+| **SAY:** “A skill is a playbook in git. Next time I type `/` and the name, or it just follows the conventions.” | Open `.cursor/skills/…/SKILL.md` for 10 seconds. Don’t read it. |
+
+---
+
+## 14:00–15:00 · Cloud
+
+Dropdown → **Cloud** (or cursor.com/agents). Don’t wait.
+
+**TYPE:**
+
+> add a short packing list to the trip dossier, same card style, open a PR
+
+**SAY:** “That run is on a VM, not my laptop. I review the PR tomorrow.” Stop.
+
+---
+
+## Recap
+
+Live site → Plan a ticket → Agent ships it → Cmd+K for a line → skill so the next agent matches your UI → Cloud while you sleep.
+
+**Cmd+/** model · **Cmd+N** new chat · **Cmd+K** inline in the IDE.
+
+---
+
+## If it breaks
+
+| Problem | Fix |
+| --- | --- |
+| Cmd+K opens search overlay | You’re in Agents Window. Click **IDE**. Select code in the file. |
+| Agent adds React | `vanilla JS only, stay in index.html` |
+| No trip on screen | Lisbon demo button / Resume last trip. Don’t quiz-generate live. |
+| Wifi dies | Cmd+/ + Cmd+N + Cmd+K on the homepage headline, show Cloud tab. |
