@@ -1,0 +1,76 @@
+diff --git a/README.md b/README.md
+index 47f1f86..1670f39 100644
+--- a/README.md
++++ b/README.md
+@@ -7,9 +7,20 @@ Live at [fidelisapp.netlify.app](https://fidelisapp.netlify.app).
+ ## Stack
+ 
+ - `index.html` — static frontend, vanilla JS
++- `demo/sample-trip.js` — offline Lisbon trip for local / Cursor demos (no API key)
+ - `netlify/functions/plan.js` — serverless function that calls the Anthropic API
+ - Deploys automatically to Netlify on every push to `main`
+ 
++## Campus / startup-club demo
++
++Step-by-step 15-minute Cursor walkthrough (models, Agent, Cmd+K, skills, Cloud Agents): **[DEMO_SCRIPT.md](DEMO_SCRIPT.md)**.
++
++```bash
++npx --yes serve . -p 5173
++# open http://localhost:5173 → "Open the Lisbon demo trip"
++```
++
+ ## Setup
+ 
+ The Anthropic API key lives **only** in Netlify environment variables (`ANTHROPIC_API_KEY`) — never in this repo.
++Backend (Supabase, Maps, waitlist): **[SETUP.md](SETUP.md)**.
+diff --git a/index.html b/index.html
+index ea0a56f..23130e2 100644
+--- a/index.html
++++ b/index.html
+@@ -4,6 +4,7 @@
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>fidelis — your trip, handled</title>
++<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+ <meta name="description" content="fidelis plans and arranges your whole trip from a short quiz — one decisive hotel pick, day-by-day plans, and restaurants, with the reasoning behind every choice." />
+ <meta property="og:title" content="fidelis — your trip, handled" />
+ <meta property="og:description" content="Answer a 2-minute quiz. Your AI travel agent picks the hotel, plans your days, and chooses where you eat — veto anything with one tap." />
+@@ -182,7 +183,8 @@ input[type=range]{flex:1;accent-color:var(--sea);}
+     <h1>Be on the trip.<br /><em>Not in the tabs.</em></h1>
+     <p>Answer a short quiz about your tastes and budget — then your agent chooses the hotel, plans your days, and picks where you eat. You just show up, together.</p>
+     <button class="cta" onclick="startQuiz()">Brief my agent →</button>
+-    <p class="hero-note">Takes about 2 minutes. Every pick comes with the agent's reasoning — veto anything with one tap.</p>
++    <button class="veto" style="margin-left:10px;margin-top:12px" onclick="loadDemoTrip()">Open the Lisbon demo trip →</button>
++    <p class="hero-note">Takes about 2 minutes. Every pick comes with the agent's reasoning — veto anything with one tap. For a Cursor demo, use the Lisbon sample — it loads offline.</p>
+     <button id="resumeBtn" class="restart hidden" onclick="resumeLast()">↩ Resume your last trip</button>
+ 
+     <form class="waitlist" name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="joinWaitlist(event)">
+@@ -364,6 +366,7 @@ if (SUPABASE_URL && SUPABASE_ANON_KEY){
+ }
+ window.dispatchEvent(new Event("sb-ready"));
+ </script>
++<script src="demo/sample-trip.js"></script>
+ <script>
+ /* ---------- data ---------- */
+ const OPTS = {
+@@ -725,6 +728,20 @@ async function claimPendingTrips(session){
+     localStorage.removeItem("fidelis_pending_trips");
+   }catch(e){ console.warn("fidelis: claim error", e); }
+ }
++function loadDemoTrip(){
++  const sample = window.FIDELIS_SAMPLE_TRIP;
++  if (!sample || !sample.plan){
++    $("errMsg").textContent = "Demo trip file failed to load (demo/sample-trip.js).";
++    show("error");
++    return;
++  }
++  plan = JSON.parse(JSON.stringify(sample.plan));
++  Object.assign(form, sample.form || {});
++  renderResult();
++  show("result");
++  stashPlan();
++  track("demo_trip_opened");
++}
+ function resumeLast(){
+   try{
+     const saved = JSON.parse(localStorage.getItem("fidelis_last_plan") || "null");
